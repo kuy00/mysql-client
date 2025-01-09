@@ -9,10 +9,12 @@ const ConnectionInfo = () => {
   return (
     <View style={{ flex: 1 }}>
       <Text style={{ color: theme.colors.text }}>
-        {connectionInfos[0].name}
+        {connectionInfos.map((connectionInfo, index) => (
+          <Text key={index}>{connectionInfo.name}</Text>
+        ))}
       </Text>
     </View>
   );
 };
 
-export default ConnectionInfo;
+export default ConnectionbbInfo;
