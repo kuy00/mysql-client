@@ -17,4 +17,4 @@ const ConnectionInfo = () => {
   );
 };
 
-export default ConnectionbbInfo;
+export default ConnectionInfo;
