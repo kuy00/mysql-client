@@ -16,7 +16,10 @@ const RootLayout = () => {
         onInit={useMigration}
       >
         <QueryClientProvider client={queryClient}>
-          <Stack screenOptions={{ headerTitle: "Mysql Client" }} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="connectionInfo" />
+            <Stack.Screen name="+not-found" />
+          </Stack>
         </QueryClientProvider>
       </SQLiteProvider>
     </ThemeProvider>

@@ -1,25 +1,7 @@
-import ConnectionInfo from "@/components/ConnectionInfo";
-import { useTheme } from "@react-navigation/native";
-import { Suspense } from "react";
-import { Text, View } from "react-native";
+import { Redirect } from "expo-router";
 
-export default function Index() {
-  const theme = useTheme();
+const Index = () => {
+  return <Redirect href="/connectionInfo" />;
+};
 
-  return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      <Text style={{ color: theme.colors.text }}>
-        Edit app/index.tsx to edit this screen.
-      </Text>
-      <Suspense
-        fallback={<Text style={{ color: theme.colors.text }}>Loading...</Text>}
-      >
-        <ConnectionInfo />
-      </Suspense>
-    </View>
-  );
-}
+export default Index;
