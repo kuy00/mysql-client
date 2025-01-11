@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { Text, View } from "react-native";
 
 const Index = () => {
-  console.log("connection info");
   const theme = useTheme();
 
   return (

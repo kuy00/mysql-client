@@ -1,7 +1,6 @@
 import { Stack } from "expo-router";
 
 const ConnectionInfoLayout = () => {
-  console.log("test");
   return (
     <Stack>
       <Stack.Screen
