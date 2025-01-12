@@ -1,10 +1,19 @@
-import ConnectionInfo from "@/components/ConnectionInfo";
+import ConnectionInfo from "@/components/organisms/ConnectionInfo";
+import { ConnectionInfoHeaderRight } from "@/components/organisms/ConnectionInfoHeader";
 import { useTheme } from "@react-navigation/native";
-import { Suspense } from "react";
+import { useNavigation } from "expo-router";
+import { Suspense, useEffect } from "react";
 import { Text, View } from "react-native";
 
 const Index = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: "Mysql Client",
+      headerRight: () => <ConnectionInfoHeaderRight />,
+    });
+  }, [navigation]);
 
   return (
     <View
