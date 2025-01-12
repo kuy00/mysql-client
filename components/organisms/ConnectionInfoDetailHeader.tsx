@@ -1,9 +1,11 @@
+import { useNavigation } from "expo-router";
 import Button from "../atoms/Button";
 import ThemedText from "../atoms/ThemedText";
 
-export const HeaderLeft = ({ onPress }: { onPress: () => void }) => {
+export const HeaderLeft = () => {
+  const navigation = useNavigation();
   return (
-    <Button onPress={onPress}>
+    <Button onPress={() => navigation.goBack()}>
       <ThemedText>Close</ThemedText>
     </Button>
   );
