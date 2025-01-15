@@ -1,10 +1,10 @@
-import { useFetchConnectionInfo } from "@/data/connectionInfo";
+import { fetch } from "@/data/connectionInfo";
 import { useTheme } from "@react-navigation/native";
 import { Text, View } from "react-native";
 
 const ConnectionInfo = () => {
   const theme = useTheme();
-  const { data: connectionInfos } = useFetchConnectionInfo();
+  const { data: connectionInfos } = fetch();
 
   return (
     <View style={{ flex: 1 }}>

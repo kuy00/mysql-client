@@ -1,11 +1,10 @@
 import { useColorSchemeTheme } from "@/hooks/useColorSchemeTheme";
 import { ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
-import { useMigration } from "@/hooks/useMigration";
 import { SQLiteProvider } from "expo-sqlite";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import migrate from "@/utils/migrator";
 
 const RootLayout = () => {
   const theme = useColorSchemeTheme();
@@ -15,16 +14,14 @@ const RootLayout = () => {
     <ThemeProvider value={theme}>
       <SQLiteProvider
         databaseName={process.env.EXPO_PUBLIC_DB_NAME}
-        onInit={useMigration}
+        onInit={migrate}
       >
         <QueryClientProvider client={queryClient}>
           <GestureHandlerRootView style={{ flex: 1 }}>
-            <BottomSheetModalProvider>
-              <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="connectionInfo" />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-            </BottomSheetModalProvider>
+            <Stack screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="connectionInfo" />
+              <Stack.Screen name="+not-found" />
+            </Stack>
           </GestureHandlerRootView>
         </QueryClientProvider>
       </SQLiteProvider>

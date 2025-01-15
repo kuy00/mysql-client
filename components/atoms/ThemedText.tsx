@@ -1,12 +1,12 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import { StyleProp, StyleSheet, Text, TextStyle } from "react-native";
 
-export type ThemedTextPropsType = {
+export type ThemedTextProps = {
   children: React.ReactNode;
   style?: StyleProp<TextStyle>;
 };
 
-const ThemedText = (props: ThemedTextPropsType) => {
+const ThemedText = (props: ThemedTextProps) => {
   const { children, style } = props;
   const theme = useTheme();
   const styles = makeStyles(theme);
