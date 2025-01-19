@@ -1,9 +1,9 @@
-import ConnectionInfo from "@/components/organisms/ConnectionInfo";
 import { ConnectionInfoHeaderRight } from "@/components/organisms/ConnectionInfoHeader";
 import { useNavigationOptions } from "@/hooks/useNavigationOptions";
 import { useTheme } from "@react-navigation/native";
 import { Suspense } from "react";
 import { Text, View } from "react-native";
+import ConnectionInfoList from "@/components/organisms/ConnectionInfoList";
 
 const Index = () => {
   const theme = useTheme();
@@ -22,7 +22,7 @@ const Index = () => {
       <Suspense
         fallback={<Text style={{ color: theme.colors.text }}>Loading...</Text>}
       >
-        <ConnectionInfo />
+        <ConnectionInfoList />
       </Suspense>
     </View>
   );

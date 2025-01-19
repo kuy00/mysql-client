@@ -1,5 +1,5 @@
-import { db } from "../database";
-import { SelectConnectionInfo } from "../schemas";
+import { db } from "../../db/database";
+import { SelectConnectionInfo } from "../../db/schemas";
 
 type ConnectionInfoRepository = {
   get: () => Promise<SelectConnectionInfo[]>;
