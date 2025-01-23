@@ -1,5 +1,3 @@
-import { ConnectionInfoHeaderRight } from "@/components/organisms/ConnectionInfoHeader";
-import { useNavigationOptions } from "@/hooks/useNavigationOptions";
 import { useTheme } from "@react-navigation/native";
 import { Suspense } from "react";
 import { Text, View } from "react-native";
@@ -7,10 +5,6 @@ import ConnectionInfoList from "@/components/organisms/ConnectionInfoList";
 
 const Index = () => {
   const theme = useTheme();
-  useNavigationOptions({
-    headerTitle: "Mysql Client",
-    headerRight: () => <ConnectionInfoHeaderRight />,
-  });
 
   return (
     <View
