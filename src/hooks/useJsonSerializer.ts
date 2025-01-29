@@ -2,11 +2,13 @@ import { JsonSerializerContext } from "@/providers/JsonSerializerProvider";
 import { useContext } from "react";
 
 export const useJsonSerializer = () => {
-  const jsonSerializer = useContext(JsonSerializerContext);
+  const context = useContext(JsonSerializerContext);
 
-  if (!jsonSerializer) {
-    throw new Error("No JsonSerializer set");
+  if (!context) {
+    throw new Error(
+      "useJsonSerializer must be used within a JsonSerializerProvider",
+    );
   }
 
-  return jsonSerializer;
+  return context;
 };

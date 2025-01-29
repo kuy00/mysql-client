@@ -3,7 +3,7 @@ import { db } from "../database";
 import { useJsonSerializer } from "@/hooks/useJsonSerializer";
 import ConnectionInfo from "@/domain/entities/connectionInfo";
 
-const connectionInfoRepositoryImpl = (): ConnectionInfoRepository => {
+const ConnectionInfoRepositoryImpl = (): ConnectionInfoRepository => {
   const jsonSerializer = useJsonSerializer();
 
   return {
@@ -17,4 +17,4 @@ const connectionInfoRepositoryImpl = (): ConnectionInfoRepository => {
   };
 };
 
-export default connectionInfoRepositoryImpl;
+export default ConnectionInfoRepositoryImpl;

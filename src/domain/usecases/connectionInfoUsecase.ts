@@ -1,18 +1,16 @@
 import ConnectionInfo from "../entities/connectionInfo";
-import connectionInfoRepositoryImpl from "@/infrastructure/database/repositories/connectionInfoRepositoryImpl";
+import ConnectionInfoRepository from "../repositories/connectionInfoRepository";
 
-type ConnectionInfoUseCase = {
+export interface ConnectionInfoUseCaseType {
   fetch: () => Promise<ConnectionInfo[] | null>;
-};
+}
 
-const connectionInfoUseCase = (): ConnectionInfoUseCase => {
-  const connectionInfoRepo = connectionInfoRepositoryImpl();
-
+export const ConnectionInfoUseCase = (
+  connectionInfoRepository: ConnectionInfoRepository,
+): ConnectionInfoUseCaseType => {
   return {
     fetch: async () => {
-      return await connectionInfoRepo.get();
+      return await connectionInfoRepository.get();
     },
   };
 };
-
-export default connectionInfoUseCase;
