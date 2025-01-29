@@ -1,4 +1,5 @@
 import ThemedText from "@/components/atoms/ThemedText";
+import InputField from "@/components/molecules/InputField";
 import { useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
 
@@ -8,6 +9,7 @@ const ConnectionInfoDetail = () => {
   return (
     <View>
       <ThemedText>test: {id}</ThemedText>
+      <InputField label="Host/IP" />
     </View>
   );
 };

@@ -1,6 +1,6 @@
-import connectionInfoRepository from "@/core/repositories/connectionInfoRepository";
+import connectionInfoRepository from "@/domain/repositories/connectionInfoRepository";
 import { useJsonSerializer } from "@/hooks/useJsonSerializer";
-import ConnectionInfo from "../entity/connectionInfo";
+import ConnectionInfo from "../entities/connectionInfo";
 
 type ConnectionInfoUseCase = {
   fetch: () => Promise<ConnectionInfo[] | null>;

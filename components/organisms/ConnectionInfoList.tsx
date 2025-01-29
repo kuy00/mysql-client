@@ -1,4 +1,4 @@
-import connectionInfoUseCase from "@/core/usecases/connectionInfoUsecase";
+import connectionInfoUseCase from "@/domain/usecases/connectionInfoUsecase";
 import { useTheme } from "@react-navigation/native";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Text, View } from "react-native";
