@@ -1,6 +1,6 @@
 import { migrate as drizzleMigrate } from "drizzle-orm/expo-sqlite/migrator";
-import { db } from "@/db/database";
-import migrations from "@/db/migrations/migrations";
+import { db } from "@/infrastructure/database/database";
+import migrations from "@/infrastructure/database/migrations/migrations";
 
 const migrate = async () => {
   try {

@@ -1,16 +1,7 @@
-import { db } from "../../db/database";
-import { SelectConnectionInfo } from "../../db/schemas";
+import ConnectionInfo from "../entities/connectionInfo";
 
-type ConnectionInfoRepository = {
-  get: () => Promise<SelectConnectionInfo[]>;
-};
+interface ConnectionInfoRepository {
+  get: () => Promise<ConnectionInfo[]>;
+}
 
-const connectionInfoRepository = (): ConnectionInfoRepository => {
-  return {
-    get: async () => {
-      return await db.query.connectionInfo.findMany();
-    },
-  };
-};
-
-export default connectionInfoRepository;
+export default ConnectionInfoRepository;

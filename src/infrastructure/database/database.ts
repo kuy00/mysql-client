@@ -1,6 +1,6 @@
 import * as SQLite from "expo-sqlite";
 import { drizzle } from "drizzle-orm/expo-sqlite";
-import * as schemas from "@/db/schemas";
+import * as schemas from "@/infrastructure/database/schemas";
 
 const sqlite = SQLite.openDatabaseSync(process.env.EXPO_PUBLIC_DB_NAME, {
   useNewConnection: true,
