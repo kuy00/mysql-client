@@ -14,15 +14,28 @@ const InputField = (props: InputFieldProps) => {
 
   return (
     <View style={styles.container}>
-      <ThemedText>{label}</ThemedText>
-      <Input />
+      <ThemedText style={styles.label}>{label}</ThemedText>
+      <Input style={styles.input} />
     </View>
   );
 };
 
 const makeStyles = (theme: Theme) =>
   StyleSheet.create({
-    container: { backgroundColor: "red" },
+    container: {
+      flex: 1,
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    label: {
+      fontSize: 18,
+    },
+    input: {
+      flex: 1,
+      textAlign: "right",
+      color: theme.colors.text,
+    },
   });
 
 export default InputField;
