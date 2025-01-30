@@ -11,7 +11,6 @@ const HeaderRightConnectionInfo = () => {
       <Link href="/connectionInfo/[id]" asChild>
         <Button
           icon={<AntDesign name="plus" size={24} color={theme.colors.text} />}
-          iconDirection="left"
         />
       </Link>
     </>

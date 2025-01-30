@@ -8,13 +8,22 @@ import {
 
 export type InputProps = {
   style?: StyleProp<TextStyle>;
+  name?: string;
   value?: string;
   isFocused?: boolean;
   onChange?: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
+  onChangeText?: (text: string, name?: string) => void;
 };
 
 const Input = (props: InputProps) => {
-  const { style, value, isFocused, onChange } = props;
+  const {
+    style,
+    name,
+    value,
+    isFocused,
+    onChange,
+    onChangeText: onChangeTextWithName,
+  } = props;
 
   return (
     <TextInput
@@ -22,6 +31,9 @@ const Input = (props: InputProps) => {
       value={value}
       autoFocus={isFocused}
       onChange={onChange}
+      onChangeText={(text) =>
+        onChangeTextWithName && onChangeTextWithName(text, name)
+      }
     />
   );
 };

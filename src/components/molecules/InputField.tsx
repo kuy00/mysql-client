@@ -1,21 +1,37 @@
-import { StyleSheet, View } from "react-native";
+import {
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInputChangeEventData,
+  View,
+} from "react-native";
 import ThemedText from "../atoms/ThemedText";
 import Input from "../atoms/Input";
 import { Theme, useTheme } from "@react-navigation/native";
 
 type InputFieldProps = {
   label: string;
+  name?: string;
+  value?: string;
+  isFocused?: boolean;
+  onChange?: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
+  onChangeText?: (text: string, name?: string) => void;
 };
 
 const InputField = (props: InputFieldProps) => {
-  const { label } = props;
+  const { label, name, value, onChange } = props;
   const theme = useTheme();
   const styles = makeStyles(theme);
 
   return (
     <View style={styles.container}>
       <ThemedText style={styles.label}>{label}</ThemedText>
-      <Input style={styles.input} />
+      <Input
+        style={styles.input}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onChangeText={props.onChangeText}
+      />
     </View>
   );
 };
