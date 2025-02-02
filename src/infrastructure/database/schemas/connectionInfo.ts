@@ -1,6 +1,6 @@
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const connectionInfo = sqliteTable("connection_infos", {
+export const ConnectionInfo = sqliteTable("connection_infos", {
   id: int().primaryKey({ autoIncrement: true }),
   name: text(),
   host: text().notNull(),
@@ -10,4 +10,5 @@ export const connectionInfo = sqliteTable("connection_infos", {
   database: text(),
 });
 
-export type SelectConnectionInfo = typeof connectionInfo.$inferSelect;
+export type SelectConnectionInfo = typeof ConnectionInfo.$inferSelect;
+export type InsertConnectionInfo = typeof ConnectionInfo.$inferInsert;

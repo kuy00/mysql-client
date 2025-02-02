@@ -1,25 +1,20 @@
+import { connectionInfoAtom } from "@/atoms/connectionInfoAtom";
 import Button from "@/components/atoms/Button";
 import ThemedText from "@/components/atoms/ThemedText";
 import InputField from "@/components/molecules/InputField";
 import RowContainer from "@/components/molecules/RowContainer";
-import useForm from "@/hooks/useForm";
+import useConnectionInfo from "@/hooks/useConnectionInfo";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
+import { useResetAtom } from "jotai/utils";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 const ConnectionInfoDetail = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
-  const [formData, handleChange] = useForm({
-    host: "",
-    port: "",
-    id: "",
-    password: "",
-    alias: null,
-    database: null,
-  });
+  const { connectionInfo, handleChange, save } = useConnectionInfo();
 
   return (
     <ScrollView>
@@ -29,7 +24,7 @@ const ConnectionInfoDetail = () => {
           <InputField
             label="Host/IP"
             name="host"
-            value={formData.host}
+            value={connectionInfo.host}
             onChangeText={handleChange}
           />
         </RowContainer>
@@ -37,15 +32,15 @@ const ConnectionInfoDetail = () => {
           <InputField
             label="Port"
             name="port"
-            value={formData.port}
+            value={connectionInfo.port.toString()}
             onChangeText={handleChange}
           />
         </RowContainer>
         <RowContainer>
           <InputField
             label="Id"
-            name="id"
-            value={formData.id}
+            name="userId"
+            value={connectionInfo.userId}
             onChangeText={handleChange}
           />
         </RowContainer>
@@ -53,7 +48,7 @@ const ConnectionInfoDetail = () => {
           <InputField
             label="Password"
             name="password"
-            value={formData.password}
+            value={connectionInfo.password}
             onChangeText={handleChange}
           />
         </RowContainer>
@@ -63,8 +58,8 @@ const ConnectionInfoDetail = () => {
         <RowContainer>
           <InputField
             label="Alias"
-            name="alias"
-            value={formData.alias}
+            name="name"
+            value={connectionInfo.name}
             onChangeText={handleChange}
           />
         </RowContainer>
@@ -85,7 +80,7 @@ const ConnectionInfoDetail = () => {
           <Button
             style={{ flex: 1 }}
             label={<ThemedText style={styles.buttonLabel}>Save</ThemedText>}
-            onPress={() => console.log(formData)}
+            onPress={save}
           />
         </RowContainer>
         <RowContainer visibleBottomBorder={false}>
@@ -97,6 +92,13 @@ const ConnectionInfoDetail = () => {
               </ThemedText>
             }
             onPress={() => console.log("test connection")}
+          />
+        </RowContainer>
+        <RowContainer visibleBottomBorder={false}>
+          <Button
+            style={{ flex: 1 }}
+            label={<ThemedText style={styles.buttonLabel}>clear</ThemedText>}
+            onPress={useResetAtom(connectionInfoAtom)}
           />
         </RowContainer>
       </View>

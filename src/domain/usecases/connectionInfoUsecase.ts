@@ -1,16 +1,28 @@
 import ConnectionInfo from "../entities/connectionInfo";
 import ConnectionInfoRepository from "../repositories/connectionInfoRepository";
 
-export interface ConnectionInfoUseCaseType {
-  fetch: () => Promise<ConnectionInfo[] | null>;
+export interface ConnectionInfoUseCase {
+  fetch: () => Promise<ConnectionInfo[] | undefined>;
+  create: (data: ConnectionInfo) => Promise<ConnectionInfo | undefined>;
 }
 
-export const ConnectionInfoUseCase = (
+export const ConnectionInfoUseCasImpl = (
   connectionInfoRepository: ConnectionInfoRepository,
-): ConnectionInfoUseCaseType => {
+): ConnectionInfoUseCase => {
   return {
     fetch: async () => {
-      return await connectionInfoRepository.get();
+      try {
+        return await connectionInfoRepository.get();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    create: async (data: ConnectionInfo) => {
+      try {
+        return await connectionInfoRepository.create(data);
+      } catch (error) {
+        console.error(error);
+      }
     },
   };
 };

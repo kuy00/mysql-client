@@ -1,12 +1,12 @@
 import {
   ConnectionInfoUseCase,
-  ConnectionInfoUseCaseType,
+  ConnectionInfoUseCasImpl,
 } from "@/domain/usecases/connectionInfoUsecase";
 import { useRepository } from "@/hooks/useRepository";
 import { createContext, ReactNode } from "react";
 
 type UseCaseContainer = {
-  connectionInfoUseCase: ConnectionInfoUseCaseType;
+  connectionInfoUseCase: ConnectionInfoUseCase;
 };
 
 export const UseCaseContext = createContext<UseCaseContainer | null>(null);
@@ -14,7 +14,7 @@ export const UseCaseContext = createContext<UseCaseContainer | null>(null);
 export const UseCaseProvider = ({ children }: { children: ReactNode }) => {
   const repositoryContainer = useRepository();
   const useCaseContainer: UseCaseContainer = {
-    connectionInfoUseCase: ConnectionInfoUseCase(
+    connectionInfoUseCase: ConnectionInfoUseCasImpl(
       repositoryContainer.connectionInfoRepository,
     ),
   };

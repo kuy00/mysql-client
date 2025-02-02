@@ -16,7 +16,7 @@ const ConnectionInfoList = () => {
     <View style={{ flex: 1 }}>
       <Text style={{ color: theme.colors.text }}>
         {connectionInfos?.map((connectionInfo, index) => (
-          <Text key={index}>{connectionInfo.name}</Text>
+          <Text key={index}>{connectionInfo.host}</Text>
         ))}
       </Text>
     </View>

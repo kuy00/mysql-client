@@ -16,8 +16,8 @@ const RootLayout = () => {
   const jsonSerializer = new JsonSerializer({
     errorCallback: throwError,
     nullishPolicy: {
-      undefined: "disallow",
-      null: "disallow",
+      undefined: "allow",
+      null: "allow",
     },
   });
 
