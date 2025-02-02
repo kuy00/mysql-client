@@ -21,6 +21,11 @@ const useConnectionInfo = () => {
     }
   };
 
+  const getDatabases = () => {
+    const databases = usecase.databaseInfoUsecase.showDatabases();
+    console.log(databases);
+  };
+
   const save = async () => {
     await usecase.connectionInfoUsecase.create(connectionInfo);
     navigation.goBack();
@@ -35,6 +40,7 @@ const useConnectionInfo = () => {
   return {
     connectionInfo,
     handleChange,
+    getDatabases,
     save,
   };
 };
