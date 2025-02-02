@@ -14,7 +14,8 @@ import { ScrollView } from "react-native-gesture-handler";
 const ConnectionInfoDetail = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
-  const { connectionInfo, handleChange, save } = useConnectionInfo();
+  const { connectionInfo, handleChange, getDatabases, save } =
+    useConnectionInfo();
 
   return (
     <ScrollView>
@@ -71,6 +72,7 @@ const ConnectionInfoDetail = () => {
               <AntDesign name="right" size={18} color={theme.colors.text} />
             }
             iconDirection="right"
+            onPress={getDatabases}
           />
         </RowContainer>
       </View>
