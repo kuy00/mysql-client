@@ -1,5 +1,5 @@
 import ConnectionInfoRepository from "@/domain/repositories/connectionInfoRepository";
-import connectionInfoRepositoryImpl from "@/infrastructure/database/repositories/connectionInfoRepositoryImpl";
+import connectionInfoRepositoryImpl from "@/infrastructure/localDatabase/repositories/connectionInfoRepositoryImpl";
 import { createContext, ReactNode } from "react";
 
 type RepositoryContainer = {
