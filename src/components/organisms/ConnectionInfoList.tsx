@@ -7,7 +7,7 @@ const ConnectionInfoList = () => {
   const theme = useTheme();
   const { data: connectionInfos } = useSuspenseQuery({
     queryKey: ["connectionInfos"],
-    queryFn: useUseCase().connectionInfoUseCase.fetch,
+    queryFn: useUseCase().connectionInfoUsecase.fetch,
   });
 
   console.log(connectionInfos);

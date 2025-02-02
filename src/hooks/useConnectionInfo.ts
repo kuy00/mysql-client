@@ -22,7 +22,7 @@ const useConnectionInfo = () => {
   };
 
   const save = async () => {
-    await usecase.connectionInfoUseCase.create(connectionInfo);
+    await usecase.connectionInfoUsecase.create(connectionInfo);
     navigation.goBack();
   };
 
