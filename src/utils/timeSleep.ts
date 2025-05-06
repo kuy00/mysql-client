@@ -1,4 +1,4 @@
-const sleep = (ms: number) => {
-  const wakeUpTime = Date.now() + ms;
-  while (Date.now() < wakeUpTime) {}
-};
+const timeSleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+export default timeSleep;

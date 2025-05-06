@@ -1,12 +1,10 @@
 import ConnectionInfoRepository from "@/domain/repositories/connectionInfoRepository";
 import { db } from "../database";
-import { useJsonSerializer } from "@/hooks/useJsonSerializer";
 import { default as ConnectionInfoEntity } from "@/domain/entities/connectionInfo";
 import { ConnectionInfo } from "../schemas";
+import jsonSerializer from "@/utils/jsonSerializer";
 
 const ConnectionInfoRepositoryImpl = (): ConnectionInfoRepository => {
-  const jsonSerializer = useJsonSerializer();
-
   return {
     get: async () => {
       const connectionInfos = await db.query.ConnectionInfo.findMany();
@@ -20,7 +18,7 @@ const ConnectionInfoRepositoryImpl = (): ConnectionInfoRepository => {
       const connectionInfo = await db
         .insert(ConnectionInfo)
         .values({
-          name: data.name,
+          name: data.name ?? data.host,
           host: data.host,
           port: data.port,
           user_id: data.userId,

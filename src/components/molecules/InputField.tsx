@@ -15,10 +15,11 @@ type InputFieldProps = {
   isFocused?: boolean;
   onChange?: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
   onChangeText?: (text: string, name?: string) => void;
+  secureTextEntry?: boolean;
 };
 
 const InputField = (props: InputFieldProps) => {
-  const { label, name, value, onChange } = props;
+  const { label, name, value, onChange, secureTextEntry } = props;
   const theme = useTheme();
   const styles = makeStyles(theme);
 
@@ -31,6 +32,7 @@ const InputField = (props: InputFieldProps) => {
         value={value}
         onChange={onChange}
         onChangeText={props.onChangeText}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );

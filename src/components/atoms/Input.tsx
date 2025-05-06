@@ -13,6 +13,7 @@ export type InputProps = {
   isFocused?: boolean;
   onChange?: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
   onChangeText?: (text: string, name?: string) => void;
+  secureTextEntry?: boolean;
 };
 
 const Input = (props: InputProps) => {
@@ -23,6 +24,7 @@ const Input = (props: InputProps) => {
     isFocused,
     onChange,
     onChangeText: onChangeTextWithName,
+    secureTextEntry = false,
   } = props;
 
   return (
@@ -34,6 +36,7 @@ const Input = (props: InputProps) => {
       onChangeText={(text) =>
         onChangeTextWithName && onChangeTextWithName(text, name)
       }
+      secureTextEntry={secureTextEntry}
     />
   );
 };

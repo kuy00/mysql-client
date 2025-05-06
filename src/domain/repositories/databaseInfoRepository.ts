@@ -1,5 +1,5 @@
 interface DatabaseInfoRepository {
-  showDatabases: () => Promise<any>;
+  getDatabases: () => Promise<any>;
 }
 
 export default DatabaseInfoRepository;

@@ -1,47 +1,20 @@
-import { connectionInfoAtom } from "@/atoms/connectionInfoAtom";
-import ConnectionInfo from "@/domain/entities/connectionInfo";
-import { useAtom } from "jotai";
-import { useResetAtom } from "jotai/utils";
-import { useEffect } from "react";
-import { useUseCase } from "./useUseCase";
-import { useNavigation } from "expo-router";
+import { GET_CONNECTION_INFOS } from "@/constants/queryKey";
+import { ConnectionInfoUsecasImpl } from "@/domain/usecases/connectionInfoUsecase";
+import ConnectionInfoRepositoryImpl from "@/infrastructure/localDatabase/repositories/connectionInfoRepositoryImpl";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 const useConnectionInfo = () => {
-  const [connectionInfo, setConnectionInfo] = useAtom(connectionInfoAtom);
-  const resestConnectionInfo = useResetAtom(connectionInfoAtom);
-  const usecase = useUseCase();
-  const navigation = useNavigation();
+  const connectionInfoUsecase = ConnectionInfoUsecasImpl(
+    ConnectionInfoRepositoryImpl(),
+  );
 
-  const handleChange = (text: string, name?: string) => {
-    if (name) {
-      setConnectionInfo(
-        (connectionInfo) =>
-          new ConnectionInfo({ ...connectionInfo, [name]: text }),
-      );
-    }
-  };
-
-  const getDatabases = () => {
-    const databases = usecase.databaseInfoUsecase.showDatabases();
-    console.log(databases);
-  };
-
-  const save = async () => {
-    await usecase.connectionInfoUsecase.create(connectionInfo);
-    navigation.goBack();
-  };
-
-  useEffect(() => {
-    return () => {
-      resestConnectionInfo();
-    };
-  }, []);
+  const { data: connectionInfos } = useSuspenseQuery({
+    queryKey: GET_CONNECTION_INFOS,
+    queryFn: connectionInfoUsecase.fetch,
+  });
 
   return {
-    connectionInfo,
-    handleChange,
-    getDatabases,
-    save,
+    connectionInfos,
   };
 };
 

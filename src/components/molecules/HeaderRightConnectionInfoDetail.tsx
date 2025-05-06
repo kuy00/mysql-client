@@ -1,9 +1,9 @@
+import useConnectionInfoDetail from "@/hooks/useConnectionInfoDetail";
 import Button from "../atoms/Button";
 import ThemedText from "../atoms/ThemedText";
-import useFormWithAtom from "@/hooks/useConnectionInfo";
 
 export const HeaderRightConnectionInfoDetail = () => {
-  const { save } = useFormWithAtom();
+  const { save } = useConnectionInfoDetail();
 
   return <Button onPress={save} label={<ThemedText>Save</ThemedText>} />;
 };

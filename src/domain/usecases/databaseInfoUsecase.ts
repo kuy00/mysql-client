@@ -1,18 +1,23 @@
+import RepositoryError from "@/errors/repositoryError";
 import DatabaseInfoRepository from "../repositories/databaseInfoRepository";
+import UsecaseError from "@/errors/usecaseError";
 
 export interface DatabaseInfoUsecase {
-  showDatabases: () => Promise<any | undefined>;
+  getDatabases: () => Promise<any | undefined>;
 }
 
 export const DatabaseInfoUsecaseImpl = (
   databaseInfoRepository: DatabaseInfoRepository,
 ): DatabaseInfoUsecase => {
   return {
-    showDatabases: async () => {
+    getDatabases: async () => {
       try {
-        return await databaseInfoRepository.showDatabases();
+        return await databaseInfoRepository.getDatabases();
       } catch (error) {
-        console.error(error);
+        if (error instanceof RepositoryError) {
+          throw new UsecaseError("Failed to get databases", error);
+        }
+        throw new UsecaseError("Unexpected error", error as Error);
       }
     },
   };

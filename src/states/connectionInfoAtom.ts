@@ -1,4 +1,4 @@
-import { atomWithReset } from "jotai/utils";
+import { atomWithReset, useResetAtom } from "jotai/utils";
 import ConnectionInfo from "@/domain/entities/connectionInfo";
 
 export const connectionInfoAtom = atomWithReset<ConnectionInfo>(

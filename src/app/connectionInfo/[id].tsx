@@ -1,21 +1,19 @@
-import { connectionInfoAtom } from "@/atoms/connectionInfoAtom";
 import Button from "@/components/atoms/Button";
 import ThemedText from "@/components/atoms/ThemedText";
 import InputField from "@/components/molecules/InputField";
 import RowContainer from "@/components/molecules/RowContainer";
-import useConnectionInfo from "@/hooks/useConnectionInfo";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { useLocalSearchParams } from "expo-router";
-import { useResetAtom } from "jotai/utils";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import useConnectionInfoDetail from "@/hooks/useConnectionInfoDetail";
 
 const ConnectionInfoDetail = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
   const { connectionInfo, handleChange, getDatabases, save } =
-    useConnectionInfo();
+    useConnectionInfoDetail();
 
   return (
     <ScrollView>
@@ -51,6 +49,7 @@ const ConnectionInfoDetail = () => {
             name="password"
             value={connectionInfo.password}
             onChangeText={handleChange}
+            secureTextEntry={true}
           />
         </RowContainer>
       </View>
@@ -94,13 +93,6 @@ const ConnectionInfoDetail = () => {
               </ThemedText>
             }
             onPress={() => console.log("test connection")}
-          />
-        </RowContainer>
-        <RowContainer visibleBottomBorder={false}>
-          <Button
-            style={{ flex: 1 }}
-            label={<ThemedText style={styles.buttonLabel}>clear</ThemedText>}
-            onPress={useResetAtom(connectionInfoAtom)}
           />
         </RowContainer>
       </View>

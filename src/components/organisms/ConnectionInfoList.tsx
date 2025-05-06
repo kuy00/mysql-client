@@ -1,16 +1,10 @@
-import { useUseCase } from "@/hooks/useUseCase";
+import useConnectionInfo from "@/hooks/useConnectionInfo";
 import { useTheme } from "@react-navigation/native";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { Text, View } from "react-native";
 
 const ConnectionInfoList = () => {
   const theme = useTheme();
-  const { data: connectionInfos } = useSuspenseQuery({
-    queryKey: ["connectionInfos"],
-    queryFn: useUseCase().connectionInfoUsecase.fetch,
-  });
-
-  console.log(connectionInfos);
+  const { connectionInfos } = useConnectionInfo();
 
   return (
     <View style={{ flex: 1 }}>
