@@ -2,8 +2,8 @@ import ConnectionInfo from "../entities/connectionInfo";
 import ConnectionInfoRepository from "../repositories/connectionInfoRepository";
 
 export interface ConnectionInfoUsecase {
-  fetch: () => Promise<ConnectionInfo[] | undefined>;
-  create: (data: ConnectionInfo) => Promise<ConnectionInfo | undefined>;
+  fetch: () => Promise<ConnectionInfo[]>;
+  create: (data: ConnectionInfo) => Promise<ConnectionInfo>;
 }
 
 export const ConnectionInfoUsecasImpl = (
@@ -11,18 +11,10 @@ export const ConnectionInfoUsecasImpl = (
 ): ConnectionInfoUsecase => {
   return {
     fetch: async () => {
-      try {
-        return await connectionInfoRepository.get();
-      } catch (error) {
-        console.error(error);
-      }
+      return await connectionInfoRepository.get();
     },
     create: async (data: ConnectionInfo) => {
-      try {
-        return await connectionInfoRepository.create(data);
-      } catch (error) {
-        console.error(error);
-      }
+      return await connectionInfoRepository.create(data);
     },
   };
 };

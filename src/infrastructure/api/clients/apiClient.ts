@@ -1,3 +1,4 @@
+import { getTokenInMemory } from "@/auth/tokenMemory";
 import ApiClientError from "@/errors/apiClientError";
 import axios from "axios";
 
@@ -11,8 +12,10 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
+  const token = getTokenInMemory();
+  config.headers["token"] = token;
   console.log("before request", config);
-  // config.headers['connenction-info'] = '';
+
   return config;
 });
 

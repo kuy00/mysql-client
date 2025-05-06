@@ -1,7 +1,10 @@
+import { setTokenInMemory } from "@/auth/tokenMemory";
 import { GET_CONNECTION_INFOS } from "@/constants/queryKey";
 import ConnectionInfo from "@/domain/entities/connectionInfo";
 import { ConnectionInfoUsecasImpl } from "@/domain/usecases/connectionInfoUsecase";
-import UsecaseError from "@/errors/usecaseError";
+import { DatabaseManagementUsecaseImpl } from "@/domain/usecases/databaseManagementUsecase";
+import apiClient from "@/infrastructure/api/clients/apiClient";
+import DatabaseManagementRepositoryImpl from "@/infrastructure/api/repositories/databaseManagementRepositoryImpl";
 import ConnectionInfoRepositoryImpl from "@/infrastructure/localDatabase/repositories/connectionInfoRepositoryImpl";
 import { connectionInfoAtom } from "@/states/connectionInfoAtom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -19,6 +22,9 @@ const useConnectionInfoDetail = () => {
   const connectionInfoUsecase = ConnectionInfoUsecasImpl(
     ConnectionInfoRepositoryImpl(),
   );
+  const databaseManagementUsecase = DatabaseManagementUsecaseImpl(
+    DatabaseManagementRepositoryImpl(apiClient),
+  );
 
   const handleChange = (text: string, name?: string) => {
     if (name) {
@@ -31,14 +37,16 @@ const useConnectionInfoDetail = () => {
 
   const getDatabases = async () => {
     try {
-      // const databases = await usecase.databaseInfoUsecase.getDatabases();
+      const apiToken = await databaseManagementUsecase.createConnection(
+        connectionInfo,
+      );
+      setTokenInMemory(apiToken.token);
+
+      const databases = await databaseManagementUsecase.getDatabases();
       console.log("get databases");
+      console.log(databases);
     } catch (error) {
-      if (error instanceof UsecaseError) {
-        Alert.alert(error.message);
-      } else {
-        Alert.alert("Unexpected error");
-      }
+      Alert.alert("Unexpected error");
     }
   };
 
