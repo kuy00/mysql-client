@@ -4,7 +4,7 @@ import InputField from "@/components/molecules/InputField";
 import RowContainer from "@/components/molecules/RowContainer";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import useConnectionInfoDetail from "@/hooks/useConnectionInfoDetail";
@@ -12,8 +12,7 @@ import useConnectionInfoDetail from "@/hooks/useConnectionInfoDetail";
 const ConnectionInfoDetail = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
-  const { connectionInfo, handleChange, getDatabases, save } =
-    useConnectionInfoDetail();
+  const { connectionInfo, handleChange, save } = useConnectionInfoDetail();
 
   return (
     <ScrollView>
@@ -64,15 +63,16 @@ const ConnectionInfoDetail = () => {
           />
         </RowContainer>
         <RowContainer visibleBottomBorder={false}>
-          <Button
-            style={{ flex: 1 }}
-            label={<ThemedText style={{ fontSize: 18 }}>Database</ThemedText>}
-            icon={
-              <AntDesign name="right" size={18} color={theme.colors.text} />
-            }
-            iconDirection="right"
-            onPress={getDatabases}
-          />
+          <Link href="/connectionInfo/[id]/database" asChild>
+            <Button
+              style={{ flex: 1 }}
+              label={<ThemedText style={{ fontSize: 18 }}>Database</ThemedText>}
+              icon={
+                <AntDesign name="right" size={18} color={theme.colors.text} />
+              }
+              iconDirection="right"
+            />
+          </Link>
         </RowContainer>
       </View>
       <View style={styles.inputContainer}>

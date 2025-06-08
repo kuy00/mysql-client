@@ -1,6 +1,4 @@
-import HeaderLeftConnectionInfoDetail from "@/components/molecules/HeaderLeftConnectionInfoDetail";
 import HeaderRightConnectionInfo from "@/components/molecules/HeaderRightConnectionInfo";
-import HeaderRightConnectionInfoDetail from "@/components/molecules/HeaderRightConnectionInfoDetail";
 import { Stack } from "expo-router";
 
 const ConnectionInfoLayout = () => {
@@ -16,11 +14,9 @@ const ConnectionInfoLayout = () => {
       <Stack.Screen
         name="[id]"
         options={{
-          headerTitle: "Connection",
+          headerShown: false,
           presentation: "modal",
           gestureEnabled: false,
-          headerLeft: () => <HeaderLeftConnectionInfoDetail />,
-          headerRight: () => <HeaderRightConnectionInfoDetail />,
         }}
       />
     </Stack>
