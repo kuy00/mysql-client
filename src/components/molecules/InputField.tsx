@@ -19,7 +19,7 @@ type InputFieldProps = {
 };
 
 const InputField = (props: InputFieldProps) => {
-  const { label, name, value, onChange, secureTextEntry } = props;
+  const { label, name, value, onChange, onChangeText, secureTextEntry } = props;
   const theme = useTheme();
   const styles = makeStyles(theme);
 
@@ -31,7 +31,7 @@ const InputField = (props: InputFieldProps) => {
         name={name}
         value={value}
         onChange={onChange}
-        onChangeText={props.onChangeText}
+        onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
       />
     </View>
