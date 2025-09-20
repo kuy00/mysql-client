@@ -4,7 +4,7 @@ import InputField from "@/components/molecules/InputField";
 import RowContainer from "@/components/molecules/RowContainer";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { Link, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import useConnectionInfoDetail from "@/hooks/useConnectionInfoDetail";
@@ -62,38 +62,30 @@ const ConnectionInfoDetail = () => {
             onChangeText={handleChange}
           />
         </RowContainer>
-        <RowContainer visibleBottomBorder={false}>
-          <Link href="/connectionInfo/[id]/database" asChild>
-            <Button
-              style={{ flex: 1 }}
-              label={<ThemedText style={{ fontSize: 18 }}>Database</ThemedText>}
-              icon={
-                <AntDesign name="right" size={18} color={theme.colors.text} />
-              }
-              iconDirection="right"
-            />
-          </Link>
+        <RowContainer
+          visibleBottomBorder={false}
+          onPress={() => router.push("/connectionInfo/[id]/database")}
+        >
+          <Button
+            style={{ flex: 1 }}
+            label={<ThemedText style={{ fontSize: 18 }}>Database</ThemedText>}
+            icon={
+              <AntDesign name="right" size={18} color={theme.colors.text} />
+            }
+            iconDirection="right"
+          />
         </RowContainer>
       </View>
       <View style={styles.inputContainer}>
         <ThemedText style={styles.title}>ACTIONS</ThemedText>
-        <RowContainer>
-          <Button
-            style={{ flex: 1 }}
-            label={<ThemedText style={styles.buttonLabel}>Save</ThemedText>}
-            onPress={save}
-          />
+        <RowContainer onPress={save}>
+          <ThemedText style={styles.buttonLabel}>Save</ThemedText>
         </RowContainer>
-        <RowContainer visibleBottomBorder={false}>
-          <Button
-            style={{ flex: 1 }}
-            label={
-              <ThemedText style={styles.buttonLabel}>
-                Test Connection
-              </ThemedText>
-            }
-            onPress={() => console.log("test connection")}
-          />
+        <RowContainer
+          visibleBottomBorder={false}
+          onPress={() => console.log("test connection")}
+        >
+          <ThemedText style={styles.buttonLabel}>Test Connection</ThemedText>
         </RowContainer>
       </View>
     </ScrollView>
