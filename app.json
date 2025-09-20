@@ -2,6 +2,12 @@
   "expo": {
     "name": "MysqlClient",
     "slug": "MysqlClient",
+    "splash": {
+      "image": "./assets/images/lite-icon.png",
+      "imageWidth": 200,
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -14,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.MysqlClient"
@@ -29,7 +35,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/lite-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
