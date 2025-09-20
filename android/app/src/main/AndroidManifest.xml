@@ -26,6 +26,7 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
         <data android:scheme="com.anonymous.MysqlClient"/>
+        <data android:scheme="exp+mysqlclient"/>
       </intent-filter>
     </activity>
   </application>
