@@ -1,7 +1,7 @@
-import Database from "../entities/database";
-import ConnectionInfo from "../entities/connectionInfo";
-import Token from "../entities/token";
-import DatabaseManagementRepository from "../repositories/databaseManagementRepository";
+import Database from "@/domain/entities/database";
+import ConnectionInfo from "@/domain/entities/connectionInfo";
+import Token from "@/domain/entities/token";
+import DatabaseManagementRepository from "@/domain/repositories/databaseManagementRepository";
 
 export interface DatabaseManagementUsecase {
   createConnection: (connectionInfo: ConnectionInfo) => Promise<Token>;
@@ -9,12 +9,12 @@ export interface DatabaseManagementUsecase {
 }
 
 export const DatabaseManagementUsecaseImpl = (
-  databaseManagementRepository: DatabaseManagementRepository,
+  databaseManagementRepository: DatabaseManagementRepository
 ): DatabaseManagementUsecase => {
   return {
     createConnection: async (connectionInfo: ConnectionInfo) => {
       return await databaseManagementRepository.createConnection(
-        connectionInfo,
+        connectionInfo
       );
     },
     getDatabases: async () => {

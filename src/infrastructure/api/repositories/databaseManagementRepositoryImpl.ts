@@ -6,7 +6,7 @@ import ConnectionInfo from "@/domain/entities/connectionInfo";
 import Token from "@/domain/entities/token";
 
 const DatabaseManagementRepositoryImpl = (
-  client: AxiosInstance,
+  client: AxiosInstance
 ): DatabaseInfoRepository => {
   return {
     createConnection: async (connectionInfo: ConnectionInfo) => {

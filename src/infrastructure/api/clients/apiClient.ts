@@ -24,7 +24,7 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     throw new ApiClientError("Http error", error);
-  },
+  }
 );
 
 export default apiClient;

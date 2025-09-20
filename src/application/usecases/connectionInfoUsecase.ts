@@ -1,5 +1,5 @@
-import ConnectionInfo from "../entities/connectionInfo";
-import ConnectionInfoRepository from "../repositories/connectionInfoRepository";
+import ConnectionInfo from "@/domain/entities/connectionInfo";
+import ConnectionInfoRepository from "@/domain/repositories/connectionInfoRepository";
 
 export interface ConnectionInfoUsecase {
   fetch: () => Promise<ConnectionInfo[]>;
@@ -7,7 +7,7 @@ export interface ConnectionInfoUsecase {
 }
 
 export const ConnectionInfoUsecasImpl = (
-  connectionInfoRepository: ConnectionInfoRepository,
+  connectionInfoRepository: ConnectionInfoRepository
 ): ConnectionInfoUsecase => {
   return {
     fetch: async () => {
