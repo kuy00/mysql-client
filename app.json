@@ -39,6 +39,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3d1de888-a9aa-440c-a63b-e0b6d89cc9a3"
+      }
+    },
+    "owner": "kikaku"
   }
 }
