@@ -1,7 +1,6 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import { ReactNode } from "react";
-import { StyleSheet, View } from "react-native";
-import { Pressable } from "react-native-gesture-handler";
+import { Pressable, StyleSheet, View } from "react-native";
 
 type RowContainerProps = {
   children: ReactNode;
@@ -56,6 +55,7 @@ const makeStyles = (theme: Theme) =>
       justifyContent: "space-between",
       borderBottomColor: theme.colors.border,
       paddingVertical: 12,
+      alignItems: "center",
     },
   });
 

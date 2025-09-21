@@ -16,10 +16,10 @@ export type ButtonProps = {
 };
 
 const Button = forwardRef((props: ButtonProps, ref: ForwardedRef<View>) => {
-  const { style, icon, iconDirection = "left", onPress } = props;
+  const { style, icon, iconDirection = "left", onPress = () => {} } = props;
 
   return (
-    <Pressable style={[styles.button, style]} onPress={onPress}>
+    <Pressable style={[styles.button, style]} onPress={onPress} ref={ref}>
       {icon && iconDirection === "left" && icon}
       {props.label}
       {icon && iconDirection === "right" && icon}
