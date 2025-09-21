@@ -1,20 +1,16 @@
-import { useTheme } from "@react-navigation/native";
 import { Suspense } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import ConnectionInfoList from "@/components/organisms/ConnectionInfoList";
 import { ScrollView } from "react-native-gesture-handler";
+import ThemedText from "@/components/atoms/ThemedText";
 
 const Index = () => {
-  const theme = useTheme();
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={{ color: theme.colors.text }}>DB Connections</Text>
+        <ThemedText>DB Connections</ThemedText>
       </View>
-      <Suspense
-        fallback={<Text style={{ color: theme.colors.text }}>Loading...</Text>}
-      >
+      <Suspense fallback={<ThemedText>Loading...</ThemedText>}>
         <ConnectionInfoList />
       </Suspense>
     </ScrollView>

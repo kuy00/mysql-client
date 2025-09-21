@@ -9,7 +9,7 @@ import { useAtom } from "jotai/react";
 import { useResetAtom } from "jotai/utils";
 import { useEffect } from "react";
 
-const useConnectionInfoDetail = () => {
+const useConnectionInfoDetail = (id?: string) => {
   const [connectionInfo, setConnectionInfo] = useAtom(connectionInfoAtom);
   const reset = useResetAtom(connectionInfoAtom);
   const navigation = useNavigation();
@@ -17,6 +17,19 @@ const useConnectionInfoDetail = () => {
   const connectionInfoUsecase = ConnectionInfoUsecasImpl(
     ConnectionInfoRepositoryImpl()
   );
+
+  useEffect(() => {
+    if (id && id !== "[id]") {
+      getConnectionInfo(id);
+    }
+  }, []);
+
+  const getConnectionInfo = async (id: string) => {
+    const data = await connectionInfoUsecase.getById?.(Number(id));
+    if (data) {
+      setConnectionInfo(data);
+    }
+  };
 
   const handleChange = (text: string, name?: string) => {
     if (name) {
@@ -28,7 +41,12 @@ const useConnectionInfoDetail = () => {
   };
 
   const save = async () => {
-    await connectionInfoUsecase.create(connectionInfo);
+    if (connectionInfo.id) {
+      await connectionInfoUsecase.update(connectionInfo);
+    } else {
+      await connectionInfoUsecase.create(connectionInfo);
+    }
+
     navigation.goBack();
   };
 

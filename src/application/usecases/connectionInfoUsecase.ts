@@ -3,7 +3,9 @@ import ConnectionInfoRepository from "@/domain/repositories/connectionInfoReposi
 
 export interface ConnectionInfoUsecase {
   fetch: () => Promise<ConnectionInfo[]>;
+  getById?: (id: number) => Promise<ConnectionInfo>;
   create: (data: ConnectionInfo) => Promise<ConnectionInfo>;
+  update: (data: ConnectionInfo) => Promise<ConnectionInfo>;
 }
 
 export const ConnectionInfoUsecasImpl = (
@@ -13,8 +15,14 @@ export const ConnectionInfoUsecasImpl = (
     fetch: async () => {
       return await connectionInfoRepository.get();
     },
+    getById: async (id: number) => {
+      return await connectionInfoRepository.getById(id);
+    },
     create: async (data: ConnectionInfo) => {
       return await connectionInfoRepository.create(data);
+    },
+    update: async (data: ConnectionInfo) => {
+      return await connectionInfoRepository.update(data);
     },
   };
 };

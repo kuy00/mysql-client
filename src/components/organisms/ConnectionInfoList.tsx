@@ -1,18 +1,21 @@
 import useConnectionInfo from "@/hooks/useConnectionInfo";
-import { useTheme } from "@react-navigation/native";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import RowContainer from "../molecules/RowContainer";
 import { Octicons } from "@expo/vector-icons";
 import ContextMenu from "react-native-context-menu-view";
+import { router } from "expo-router";
+import ThemedText from "../atoms/ThemedText";
 
 const ConnectionInfoList = () => {
-  const theme = useTheme();
   const { connectionInfos } = useConnectionInfo();
 
   return (
     <View style={{ flex: 1 }}>
       {connectionInfos?.map((connectionInfo, index) => {
-        const name = connectionInfo.name ?? connectionInfo.host;
+        const name =
+          connectionInfo.name === ""
+            ? connectionInfo.host
+            : connectionInfo.name;
 
         return (
           <View key={index}>
@@ -23,10 +26,10 @@ const ConnectionInfoList = () => {
                   style={styles.image}
                 />
                 <View style={styles.subContainer}>
-                  <Text style={[styles.title, { color: theme.colors.text }]}>
-                    {name}
-                  </Text>
-                  <Text style={styles.subTitle}>{connectionInfo.host}</Text>
+                  <ThemedText style={styles.title}>{name}</ThemedText>
+                  <ThemedText style={styles.subTitle}>
+                    {connectionInfo.host}
+                  </ThemedText>
                 </View>
               </View>
             </RowContainer>
@@ -44,6 +47,22 @@ const ConnectionInfoList = () => {
                     destructive: true,
                   },
                 ]}
+                onPress={(e) => {
+                  switch (e.nativeEvent.name) {
+                    case "Connect":
+                      console.log("Connect");
+                      break;
+                    case "Edit":
+                      router.push(`/connectionInfo/${connectionInfo.id}`);
+                      break;
+                    case "Duplicate":
+                      console.log("Duplicate");
+                      break;
+                    case "Delete":
+                      console.log("Delete");
+                      break;
+                  }
+                }}
               >
                 <View>
                   <Octicons name="gear" size={24} color="gray" />
@@ -71,9 +90,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flexDirection: "row",
-    alignItems: "center",
     flex: 1,
-    justifyContent: "space-between",
   },
   image: {
     width: 40,

@@ -18,6 +18,7 @@ const makeStyles = (theme: Theme) =>
   StyleSheet.create({
     text: {
       color: theme.colors.text,
+      fontSize: 14,
     },
   });
 

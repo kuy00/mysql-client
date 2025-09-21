@@ -3,16 +3,16 @@ import RowContainer from "@/components/molecules/RowContainer";
 import DatabaseList from "@/components/organisms/DatabaseList";
 import SuspenseBoundary from "@/components/shared/SuspenseBoundary";
 import { GET_DATABASES } from "@/constants/queryKey";
+import useDatabase from "@/hooks/useDatabase";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 const Database = () => {
+  const { changeDatabase } = useDatabase();
+
   return (
     <ScrollView>
       <View style={styles.container}>
-        <RowContainer align="center">
-          <ThemedText>Manually specify</ThemedText>
-        </RowContainer>
         <View style={styles.databaseContainer}>
           <ThemedText style={styles.title}>DATABASES</ThemedText>
           <SuspenseBoundary
@@ -31,7 +31,7 @@ const Database = () => {
             <DatabaseList />
           </SuspenseBoundary>
         </View>
-        <RowContainer align="center">
+        <RowContainer align="center" onPress={() => changeDatabase("")}>
           <ThemedText>Clear database</ThemedText>
         </RowContainer>
       </View>
@@ -41,10 +41,10 @@ const Database = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 30,
+    marginVertical: 15,
   },
   databaseContainer: {
-    marginVertical: 35,
+    marginBottom: 35,
   },
   title: {
     marginHorizontal: 16,

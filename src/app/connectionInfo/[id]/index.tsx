@@ -1,4 +1,3 @@
-import Button from "@/components/atoms/Button";
 import ThemedText from "@/components/atoms/ThemedText";
 import InputField from "@/components/molecules/InputField";
 import RowContainer from "@/components/molecules/RowContainer";
@@ -12,7 +11,9 @@ import useConnectionInfoDetail from "@/hooks/useConnectionInfoDetail";
 const ConnectionInfoDetail = () => {
   const theme = useTheme();
   const { id } = useLocalSearchParams();
-  const { connectionInfo, handleChange, save } = useConnectionInfoDetail();
+  const { connectionInfo, handleChange, save } = useConnectionInfoDetail(
+    id as string
+  );
 
   return (
     <ScrollView>
@@ -66,14 +67,15 @@ const ConnectionInfoDetail = () => {
           visibleBottomBorder={false}
           onPress={() => router.push("/connectionInfo/[id]/database")}
         >
-          <Button
-            style={{ flex: 1 }}
-            label={<ThemedText style={{ fontSize: 18 }}>Database</ThemedText>}
-            icon={
-              <AntDesign name="right" size={18} color={theme.colors.text} />
-            }
-            iconDirection="right"
-          />
+          <View style={{ flex: 1 }}>
+            <ThemedText style={{ fontSize: 18 }}>Database</ThemedText>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
+            {connectionInfo.database !== "" && (
+              <ThemedText>{connectionInfo.database}</ThemedText>
+            )}
+            <AntDesign name="right" size={14} color={theme.colors.text} />
+          </View>
         </RowContainer>
       </View>
       <View style={styles.inputContainer}>

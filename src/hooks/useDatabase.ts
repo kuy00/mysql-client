@@ -5,16 +5,24 @@ import apiClient from "@/infrastructure/api/clients/apiClient";
 import DatabaseManagementRepositoryImpl from "@/infrastructure/api/repositories/databaseManagementRepositoryImpl";
 import { connectionInfoAtom } from "@/states/connectionInfoAtom";
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { useAtomValue } from "jotai/react";
+import { useAtom } from "jotai/react";
 import { useEffect } from "react";
 import { Alert } from "react-native";
+import ConnectionInfo from "@/domain/entities/connectionInfo";
+import { router } from "expo-router";
 
 const useDatabase = () => {
-  const connectionInfo = useAtomValue(connectionInfoAtom);
+  const [connectionInfo, setConnectionInfo] = useAtom(connectionInfoAtom);
   const queryClient = useQueryClient();
   const databaseManagementUsecase = DatabaseManagementUsecaseImpl(
     DatabaseManagementRepositoryImpl(apiClient)
   );
+
+  useEffect(() => {
+    return () => {
+      queryClient.removeQueries({ queryKey: GET_DATABASES });
+    };
+  }, []);
 
   const { data: databases } = useSuspenseQuery({
     queryKey: GET_DATABASES,
@@ -34,14 +42,22 @@ const useDatabase = () => {
     retry: false,
   });
 
-  useEffect(() => {
-    return () => {
-      queryClient.removeQueries({ queryKey: GET_DATABASES });
-    };
-  }, []);
+  const changeDatabase = (databaseName: string) => {
+    setConnectionInfo(
+      (connectionInfo) =>
+        new ConnectionInfo({
+          ...connectionInfo,
+          database: databaseName,
+        })
+    );
+
+    router.back();
+  };
 
   return {
+    connectionInfo,
     databases,
+    changeDatabase,
   };
 };
 
