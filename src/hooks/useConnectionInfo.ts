@@ -1,11 +1,11 @@
 import { GET_CONNECTION_INFOS } from "@/constants/queryKey";
-import { ConnectionInfoUsecasImpl } from "@/domain/usecases/connectionInfoUsecase";
+import { ConnectionInfoUsecasImpl } from "@/application/usecases/connectionInfoUsecase";
 import ConnectionInfoRepositoryImpl from "@/infrastructure/localDatabase/repositories/connectionInfoRepositoryImpl";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 const useConnectionInfo = () => {
   const connectionInfoUsecase = ConnectionInfoUsecasImpl(
-    ConnectionInfoRepositoryImpl(),
+    ConnectionInfoRepositoryImpl()
   );
 
   const { data: connectionInfos } = useSuspenseQuery({

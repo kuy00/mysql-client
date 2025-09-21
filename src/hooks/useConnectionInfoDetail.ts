@@ -1,6 +1,6 @@
 import { GET_CONNECTION_INFOS } from "@/constants/queryKey";
 import ConnectionInfo from "@/domain/entities/connectionInfo";
-import { ConnectionInfoUsecasImpl } from "@/domain/usecases/connectionInfoUsecase";
+import { ConnectionInfoUsecasImpl } from "@/application/usecases/connectionInfoUsecase";
 import ConnectionInfoRepositoryImpl from "@/infrastructure/localDatabase/repositories/connectionInfoRepositoryImpl";
 import { connectionInfoAtom } from "@/states/connectionInfoAtom";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,14 +15,14 @@ const useConnectionInfoDetail = () => {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
   const connectionInfoUsecase = ConnectionInfoUsecasImpl(
-    ConnectionInfoRepositoryImpl(),
+    ConnectionInfoRepositoryImpl()
   );
 
   const handleChange = (text: string, name?: string) => {
     if (name) {
       setConnectionInfo(
         (connectionInfo) =>
-          new ConnectionInfo({ ...connectionInfo, [name]: text }),
+          new ConnectionInfo({ ...connectionInfo, [name]: text })
       );
     }
   };
