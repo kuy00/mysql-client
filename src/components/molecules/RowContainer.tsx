@@ -1,12 +1,17 @@
 import { Theme, useTheme } from "@react-navigation/native";
 import { ReactNode } from "react";
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 type RowContainerProps = {
   children: ReactNode;
   visibleBottomBorder?: boolean;
   align?: "left" | "right" | "center";
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
 };
 
 const RowContainer = (props: RowContainerProps) => {
@@ -14,32 +19,35 @@ const RowContainer = (props: RowContainerProps) => {
     children,
     visibleBottomBorder = true,
     align = "left",
-    onPress = () => {},
+    onPress = null,
   } = props;
   const theme = useTheme();
   const styles = makeStyles(theme);
-
-  return (
-    <Pressable onPress={onPress}>
-      <View style={styles.container}>
-        <View
-          style={[
-            styles.innerContainer,
-            { borderBottomWidth: visibleBottomBorder ? 0.5 : 0 },
-            {
-              justifyContent:
-                align === "left"
-                  ? "flex-start"
-                  : align === "right"
-                  ? "flex-end"
-                  : "center",
-            },
-          ]}
-        >
-          {children}
-        </View>
+  const content = (
+    <View style={styles.container}>
+      <View
+        style={[
+          styles.innerContainer,
+          { borderBottomWidth: visibleBottomBorder ? 0.5 : 0 },
+          {
+            justifyContent:
+              align === "left"
+                ? "flex-start"
+                : align === "right"
+                ? "flex-end"
+                : "center",
+          },
+        ]}
+      >
+        {children}
       </View>
-    </Pressable>
+    </View>
+  );
+
+  return onPress ? (
+    <TouchableOpacity onPress={onPress}>{content}</TouchableOpacity>
+  ) : (
+    content
   );
 };
 
