@@ -16,14 +16,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.MysqlClient"
+      "bundleIdentifier": "com.MysqlClient"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.MysqlClient"
+      "package": "com.MysqlClient"
     },
     "web": {
       "bundler": "metro",

@@ -27,6 +27,7 @@
         <data android:scheme="myapp"/>
         <data android:scheme="com.anonymous.MysqlClient"/>
         <data android:scheme="exp+mysqlclient"/>
+        <data android:scheme="com.MysqlClient"/>
       </intent-filter>
     </activity>
   </application>

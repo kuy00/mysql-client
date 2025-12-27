@@ -1,4 +1,4 @@
-package com.anonymous.MysqlClient
+package com.MysqlClient
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
